@@ -6,9 +6,11 @@ import AddReview from "./components/add-review";
 import Restaurant from "./components/restaurants";
 import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
+import Register from "./components/register";
 
 function App() {
   const [user, setUser] = React.useState(null);
+
 
   async function login(user = null) {
     setUser(user);
@@ -40,7 +42,15 @@ function App() {
               Login
             </Link>
             )}
-
+          </li>
+          <li className="nav-item" >
+            { user ? (
+              <h></h>
+            ) : (            
+            <Link to={"/register"} className="nav-link">
+              Register
+            </Link>
+            )}
           </li>
         </div>
       </nav>
@@ -51,6 +61,7 @@ function App() {
           <Route 
             path="/restaurants/:id/review"
             render={(props) => (
+              
               <AddReview {...props} user={user} />
             )}
           />
@@ -64,6 +75,12 @@ function App() {
             path="/login"
             render={(props) => (
               <Login {...props} login={login} />
+            )}
+          />
+          <Route 
+            path="/register"
+            render={(props) => (
+              <Register {...props} login={login} />
             )}
           />
         </Switch>

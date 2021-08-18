@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import RestaurantDataService from "../services/restaurant";
 
-const Login = props => {
+const Register = props => {
 
   const initialUserState = {
+    name: "",
     email: "",
     password:""
   };
@@ -15,19 +16,29 @@ const Login = props => {
     setUser({ ...user, [name]: value });
   };
 
-  const login = async () => {
-    const access = await RestaurantDataService.checkuser(user)
-    console.log(access.data)
-    
-    if (access.data === "success"){
-      props.login(user)
-      props.history.push('/');
-    }  
+  const login = () => {
+    RestaurantDataService.registeruser(user)
+    props.login(user)
+    props.history.push('/');
+
   }
 
   return (
     <div className="submit-form">
-      <div>
+      
+        <div className="form-group">
+          <label htmlFor="user">Name</label>
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            required
+            value={user.name}
+            onChange={handleInputChange}
+            name="name"
+          />
+        </div>
+
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -55,11 +66,11 @@ const Login = props => {
         </div>
 
         <button onClick={login} className="btn btn-success">
-          Login
+          Register
         </button>
-      </div>
+      
     </div>
   );
 };
 
-export default Login;
+export default Register;

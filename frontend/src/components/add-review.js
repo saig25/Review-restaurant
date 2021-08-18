@@ -3,11 +3,14 @@ import RestaurantDataService from "../services/restaurant";
 import { Link } from "react-router-dom";
 
 const AddReview = props => {
+  console.log(props)
+              
   let initialReviewState = ""
 
   let editing = false;
 
   if (props.location.state && props.location.state.currentReview) {
+    console.log("k")
     editing = true;
     initialReviewState = props.location.state.currentReview.text
   }

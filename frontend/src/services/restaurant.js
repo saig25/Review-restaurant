@@ -28,6 +28,15 @@ class RestaurantDataService{
       getCuisines(id) {
         return http.get(`/cuisines`);
       }
+
+      registeruser(user){
+        return http.post(`/register`,user)
+      }
+
+      checkuser(data){
+        return http.post(`/login`, data)
+      }
+
     
 }
 
