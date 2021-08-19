@@ -25,16 +25,23 @@ export default class UsersController {
   static async apigetUser(req, res, next) {
     try {
       const user = await UsersDAO.getUser(req.body.email)
-      console.log(req.body.password)
-      console.log(user[0].password)
+      
       if(await bcrypt.compare( req.body.password, user[0].password)){
-        res.json("success") 
-        console.log("success")
-        return "success" 
+    
+       const result = {
+            value: "success",
+            name: user[0].name
+        }
+        res.json(result)
+         
       }else{
-          res.json('wrong password')
-          console.log("wrong password")
-          return "wrong password"
+          
+          
+          const result = {
+            value: "wrong password",
+            name: "null"
+        }
+        res.json(result)
       }
      } catch (e) {
       console.error(`Unable to create user1: ${e}`)

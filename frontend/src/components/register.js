@@ -18,6 +18,7 @@ const Register = props => {
 
   const login = () => {
     RestaurantDataService.registeruser(user)
+    
     props.login(user)
     props.history.push('/');
 

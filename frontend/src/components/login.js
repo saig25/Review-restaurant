@@ -4,6 +4,7 @@ import RestaurantDataService from "../services/restaurant";
 const Login = props => {
 
   const initialUserState = {
+    name:"",
     email: "",
     password:""
   };
@@ -15,11 +16,18 @@ const Login = props => {
     setUser({ ...user, [name]: value });
   };
 
+  // const namegive = async() =>{
+  //   const
+  //   setUser({ ...user, [name]: value })
+  // }
+
   const login = async () => {
     const access = await RestaurantDataService.checkuser(user)
-    console.log(access.data)
     
-    if (access.data === "success"){
+    
+    if (access.data.value === "success"){
+      const name = "name"
+      user[name] = access.data.name
       props.login(user)
       props.history.push('/');
     }  
