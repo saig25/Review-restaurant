@@ -16,18 +16,21 @@ const Login = props => {
     setUser({ ...user, [name]: value });
   };
 
-  // const namegive = async() =>{
-  //   const
-  //   setUser({ ...user, [name]: value })
-  // }
+
 
   const login = async () => {
     const access = await RestaurantDataService.checkuser(user)
     
     
+    
     if (access.data.value === "success"){
       const name = "name"
+      const id = "id"
       user[name] = access.data.name
+      user[id] = access.data.id
+      delete user["password"]
+      delete user["email"]
+      console.log(user)
       props.login(user)
       props.history.push('/');
     }  

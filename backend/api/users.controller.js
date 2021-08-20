@@ -26,11 +26,13 @@ export default class UsersController {
     try {
       const user = await UsersDAO.getUser(req.body.email)
       
+      
       if(await bcrypt.compare( req.body.password, user[0].password)){
     
        const result = {
             value: "success",
-            name: user[0].name
+            name: user[0].name,
+            id: user[0]._id
         }
         res.json(result)
          
@@ -39,7 +41,8 @@ export default class UsersController {
           
           const result = {
             value: "wrong password",
-            name: "null"
+            name: "null",
+            id: "0"
         }
         res.json(result)
       }
